@@ -19,6 +19,7 @@ export const getAll = async (req, res, next) => {
     return res.status(200).json({
       data: response,
       message: "Get All Todo Success",
+      errors: null,
     })
   } catch (error) {
     next(error)
@@ -48,6 +49,7 @@ export const getById = async (req, res, next) => {
     return res.status(200).json({
       data: response,
       message: "Get Todo Success",
+      errors: null,
     })
   } catch (error) {
     next(error)
@@ -63,6 +65,7 @@ export const create = async (req, res, next) => {
     return res.status(201).json({
       data: response,
       message: "Create Todo Success",
+      errors: null,
     })
   } catch (error) {
     next(error)
@@ -98,6 +101,7 @@ export const update = async (req, res, next) => {
     return res.status(200).json({
       data: response,
       message: "Update Todo Success",
+      errors: null,
     })
   } catch (e) {
     next(e)
@@ -105,7 +109,7 @@ export const update = async (req, res, next) => {
 }
 export const remove = async (req, res, next) => {
   try {
-    const idTodo = validate(getTodoByIdValidation, req.params.id)
+    const idTodo = validate(removeTodoValidation, req.params.id)
     const todoCount = await prismaClient.todo.count({
       where: {
         id: idTodo,
@@ -120,6 +124,7 @@ export const remove = async (req, res, next) => {
     return res.status(200).json({
       data: null,
       message: "Delete Todo Success",
+      errors: null,
     })
   } catch (e) {
     next(e)
